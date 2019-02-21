@@ -1,0 +1,22 @@
+<html>
+    <head>
+        <title>Login details</title>
+    </head>
+    <body>
+        <form action="LoginServlet" method="post" >
+            UserId: <input type="text" name="userid"/><br>
+            password: <input type="password" name="password"/><br>
+            usertype: <br><input type="radio" name="usertype" value="Admin">A<br>
+                      <input type="radio" name="usertype" value="Vendor">V<br>
+                      <input type="radio" name="usertype" value="user">U<br>
+                      
+            status: <br><input type="radio" name="status" value="Notlogged">0<br>
+                      <input type="radio" name="status" value="loggedin">1<br>
+                      <input type="radio" name="status" value="deactivated">2<br>
+            SUBMIT:<input type="submit" name="Submit"/><br><br>
+            RESET:<input type="reset" name="Reset"/><br><br>
+            <a href="forms.html">SIGN UP</a>
+
+        </form>
+    </body>
+</html>
