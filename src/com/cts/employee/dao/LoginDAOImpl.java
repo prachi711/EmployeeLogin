@@ -24,14 +24,11 @@ public class LoginDAOImpl implements LoginDAO {
 			}
 
 	
-	private LoginDAOImpl() {
-		
-		
-	}
+	private LoginDAOImpl() {}
 	
 	public int getUserStatus(String id)
 	{
-		String query=" select userstatus from login where userid=?";
+		String query=" select status from login where userid=?";
 		Connection connection=null;
 		PreparedStatement preparedStatement=null;
 		ResultSet resultSet=null;
@@ -42,7 +39,7 @@ public class LoginDAOImpl implements LoginDAO {
 			 preparedStatement.setString(1,id);
 			 resultSet = preparedStatement.executeQuery();
 			 if(resultSet.next()){
-				return resultSet.getInt("userstatus") ;
+				return resultSet.getInt("status") ;
 			 }
 		} catch (SQLException e) {
 			// TODO: handle exception
@@ -94,6 +91,12 @@ public class LoginDAOImpl implements LoginDAO {
 		}
 		
 		return false;
+	}
+
+
+	public String authorization(String userName) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 

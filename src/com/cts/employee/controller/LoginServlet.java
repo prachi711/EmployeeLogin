@@ -16,8 +16,9 @@ import com.cts.employee.service.LoginServiceImpl;
  */
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private String password;
 	private String userName;
+	//private String password;
+	//private String userName;
 
     /**
      * Default constructor. 
@@ -33,26 +34,87 @@ public class LoginServlet extends HttpServlet {
 		RequestDispatcher requestDispatcher=null;
 		LoginService loginService=LoginServiceImpl.getInstance();
 		
-		String userid=request.getParameter("userid");
+		String userName=request.getParameter("userid");
 		String password=request.getParameter("password");
-		if(loginService.authenticate(userid, password)){
+		
+		
+		if(loginService.authenticate(userName,password))
+		{
+			int UserStatus=loginService.getUserStatus(userName);
+	       String authorization = loginService.authorization(userName);
+	       if("A".equals(authorization)&&authorization.equals("A"))
+	       {
+	    	   if(UserStatus==0)
+	    	   {
+	    		   requestDispatcher = request.getRequestDispatcher("admin.html");
+	   			   requestDispatcher.forward(request,response);
+	    	   }
+	    	   
+	    	   if(UserStatus==1)
+	    	   {
+	    		   requestDispatcher = request.getRequestDispatcher("login.html");
+	   			   requestDispatcher.forward(request,response);  
+	    	   }
+	    	   
+	    	   if(UserStatus==2)
+	    	   {
+	    		   requestDispatcher = request.getRequestDispatcher("UserDeactivated.html");
+	   			   requestDispatcher.forward(request,response);   
+	    	   }
+	       }
+	       
+	       else
+	    	   
+	       {   
+	    	   if("U".equals(authorization)&&authorization.equals("U"))
+		       {
+		    	   if(UserStatus==0)
+		    	   {
+		    		   requestDispatcher = request.getRequestDispatcher("UserHome.html");
+		   			   requestDispatcher.forward(request,response);
+		    	   }
+		    	   
+		    	   if(UserStatus==1)
+		    	   {
+		    		   requestDispatcher = request.getRequestDispatcher("login.html");
+		   			   requestDispatcher.forward(request,response);  
+		    	   }
+		    	   
+		    	   if(UserStatus==2)
+		    	   {
+		    		   requestDispatcher = request.getRequestDispatcher("UserDeactivated.html");
+		   			   requestDispatcher.forward(request,response);   
+		    	   }
+		       }
+	    	   
+	    	   else
+	    		   
+	    	   {
+	    		   if("V".equals(authorization)&&authorization.equals("V"))
+	    	       {
+	    	    	   if(UserStatus==0)
+	    	    	   {
+	    	    		   requestDispatcher = request.getRequestDispatcher("VendorHome.html");
+	    	   			   requestDispatcher.forward(request,response);
+	    	    	   }
+	    	    	   
+	    	    	   if(UserStatus==1)
+	    	    	   {
+	    	    		   requestDispatcher = request.getRequestDispatcher("login.html");
+	    	   			   requestDispatcher.forward(request,response);  
+	    	    	   }
+	    	    	   
+	    	    	   if(UserStatus==2)
+	    	    	   {
+	    	    		   requestDispatcher = request.getRequestDispatcher("UserDeactivated.html");
+	    	   			   requestDispatcher.forward(request,response);   
+	    	    	   }
+	    	       }
+	    	   }
+	    	   
+	       }
+	       
 			
-			requestDispatcher = request.getRequestDispatcher("admin.html");
-			requestDispatcher.forward(request,response);
-			
-			
-			//System.out.println(userid);
-			//System.out.println(password);
-			
-			
-		}
-		else {
-			//redirect to login page
-			
-			requestDispatcher = request.getRequestDispatcher("login.html");
-			requestDispatcher.forward(request,response);
-			//requestDispatcher.include(request, response);
-			 
 		}
 		
 		/*String userid=request.getParameter("userid");

@@ -43,5 +43,11 @@ public class LoginServiceImpl implements LoginService {
 		
 		return dao.authenticate(userName, password);
 	}
+	
+	public String authorization(String userName) {
+		
+		return dao.getUserType(userName);
+		
+	}
 
 }
